@@ -1,0 +1,11 @@
+body {
+    background-color: darkred;
+}
+
+#questions {
+    padding: 20px;
+}
+
+#answers {
+    padding: 20px;
+}

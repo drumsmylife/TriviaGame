@@ -23,12 +23,11 @@ var answer =
 //counter variables
 var isCorrect = false;
 var questionCnt = 0;
-var time = 0;
+var timeLeft = 0;
 var numberCorrect = 0;
 var numberWrong = 0;
 
-//used to reset time
-var interval;
+
 
 
 //functions
@@ -59,5 +58,55 @@ function gameStart() {
          p+= "<div>"+ l +a[i]+ "</div>";
     }
     $('#answers').html(p);
+
+
+    var number = 10;
+
+    //  Variable that will hold our interval ID when we execute
+    //  the "run" function
+    
+
+    //  When the start button gets clicked, run the clock.
+    window.onload = function() {
+    $("#startButton").on("click", start);
+    };
+    
+    var intervalId;
+
+    function run() {
+      clearInterval(intervalId);
+      intervalId = setInterval(decrement, 1000);
+    }
+
+    //  The decrement function.
+    function decrement() {
+
+      //  Decrease number by one.
+      number--;
+
+      //  Show the number in the #timeLeft tag.
+      $("#timeLeft").html("<h2>" + number + "</h2>");
+
+
+      //  Once number hits zero...
+      if (number === 0) {
+
+        //  ...run the stop function.
+        stop();
+
+      }
+    }
+
+    //  The stop function
+    function stop() {
+
+      //  Clears our intervalId
+      //  We just pass the name of the interval
+      //  to the clearInterval function.
+      clearInterval(intervalId);
+    }
+
+    //execute run function
+   run();
 
 }
