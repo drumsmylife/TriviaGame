@@ -17,6 +17,16 @@ var answer =
     ['slap shot','miracle', 'mighty ducks','goon'],
     ['helena', 'under and over it', 'teenagers', 'welcome to the black parade']
 ];
+
+var correctAnswers = 
+[
+    'd',
+    'c',
+    'a',
+    'c',
+    'b',
+    'd'
+];
                
 
 
@@ -27,10 +37,7 @@ var timeLeft = 0;
 var numberCorrect = 0;
 var numberWrong = 0;
 
-
-
-
-//functions
+//functions l= label
 function gameStart() {
     //hide start button
     $('#startButton').hide();
@@ -42,71 +49,84 @@ function gameStart() {
         switch(i){
             case 0:
                 l="a: ";
+                id="a";
                 break;
             case 1: 
                 l="b: ";
+                id="b";
                 break;
             case 2:
                 l="c: ";
+                id="c";
                 break;
             case 3:
                 l="d: ";
+                id="d";
                 break;
 
         }
-        
-         p+= "<div>"+ l +a[i]+ "</div>";
+         radiobutton="<input id="+id+" onclick='checkAnswer(this,0);' type=radio name=answer/>";
+         p+= "<div>"+ radiobutton + l +a[i]+ "</div>";
     }
     $('#answers').html(p);
-
-
-    var number = 10;
-
-    //  Variable that will hold our interval ID when we execute
-    //  the "run" function
-    
-
-    //  When the start button gets clicked, run the clock.
-    window.onload = function() {
-    $("#startButton").on("click", start);
-    };
-    
-    var intervalId;
-
-    function run() {
-      clearInterval(intervalId);
-      intervalId = setInterval(decrement, 1000);
-    }
-
-    //  The decrement function.
-    function decrement() {
-
-      //  Decrease number by one.
-      number--;
-
-      //  Show the number in the #timeLeft tag.
-      $("#timeLeft").html("<h2>" + number + "</h2>");
-
-
-      //  Once number hits zero...
-      if (number === 0) {
-
-        //  ...run the stop function.
-        stop();
-
-      }
-    }
-
-    //  The stop function
-    function stop() {
-
-      //  Clears our intervalId
-      //  We just pass the name of the interval
-      //  to the clearInterval function.
-      clearInterval(intervalId);
-    }
 
     //execute run function
    run();
 
+}
+
+var number = 10;
+
+//  Variable that will hold our interval ID when we execute
+//  the "run" function
+
+
+//  When the start button gets clicked, run the clock.
+window.onload = function() {
+    $("#startButton").on("click", run);
+};
+
+var intervalId;
+
+function checkAnswer(rb,question) {
+    console.log(rb.id);
+    console.log(question);
+    if(rb.id===correctAnswers[question]) {
+        alert("Correct");
+    } else {
+        alert("Wrong.");
+    }
+}
+
+function run() {
+  clearInterval(intervalId);
+  intervalId = setInterval(decrement, 1000);
+}
+
+//  The decrement function.
+function decrement() {
+
+  //  Decrease number by one.
+  number--;
+
+  //  Show the number in the #timeLeft tag.
+  $("#timeLeft").html("<h2>" + number + "</h2>");
+
+
+  //  Once number hits zero...
+  if (number === 0) {
+
+    //  ...run the stop function.
+    stop();
+
+  }
+}
+
+//  The stop function
+function stop() {
+
+  //  Clears our intervalId
+  //  We just pass the name of the interval
+  //  to the clearInterval function.
+  clearInterval(intervalId);
 }
